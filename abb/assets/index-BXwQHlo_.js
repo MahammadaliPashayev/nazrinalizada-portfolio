@@ -288,10 +288,10 @@ Error generating stack: `+l.message+`
 
   /* ---- progress card ---- */
   .progress-card{
-    position:absolute; left:16px; right:16px; bottom:calc(112px + env(safe-area-inset-bottom));
+    position:absolute; left:16px; right:16px; bottom:0;
     z-index:12;
     background:var(--surface); border:1px solid var(--hair);
-    border-radius:16px; padding:12px 14px 13px;
+    border-radius:16px; padding:12px 14px calc(13px + env(safe-area-inset-bottom));
     box-shadow:0 4px 20px var(--shadow-c);
   }
   .pc-row{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:9px; }
@@ -305,10 +305,9 @@ Error generating stack: `+l.message+`
 
   /* ---- bottom bar ---- */
   .bottombar{
-    position:absolute; left:0; right:0; bottom:0; z-index:14;
-    padding:8px 16px calc(24px + env(safe-area-inset-bottom));
+    position:absolute; left:0; right:0; bottom:calc(112px + env(safe-area-inset-bottom)); z-index:14;
+    padding:8px 16px 0;
     display:flex; align-items:center; justify-content:space-between; gap:14px;
-    background:linear-gradient(180deg, transparent, var(--surface) 42%);
   }
   .tabs{ display:flex; gap:4px; }
   .tab{
