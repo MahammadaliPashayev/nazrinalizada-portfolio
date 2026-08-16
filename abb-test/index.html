@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ABB Eko-ağac — Case Study</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e1b;
+    --bg-2:#111731;
+    --bg-3:#161d3d;
+    --ink:#eef1fb;
+    --ink-dim:#8d97bd;
+    --ink-faint:#5c6690;
+    --hair:#232b4d;
+    --accent:#6f8cff;
+    --accent-2:#3a56e8;
+    --gold:#dcae54;
+    --green:#7cbf68;
+    --danger:#e2685f;
+    --shadow: 0 30px 80px rgba(0,0,0,.5);
+    --maxw: 1080px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(111,140,255,.16), transparent 60%),
+      radial-gradient(700px 460px at 100% 10%, rgba(220,174,84,.10), transparent 55%);
+  }
+  .wrap{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  h1,h2,h3{ font-family:'Fraunces', Georgia, serif; font-weight:600; letter-spacing:-.01em; margin:0; }
+  p{ margin:0; }
+  a{ color:inherit; }
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    background:rgba(10,14,27,.72); border-bottom:1px solid var(--hair);
+  }
+  .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:14.5px; letter-spacing:-.01em; text-decoration:none; }
+  .brand .dot{ width:9px; height:9px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--gold)); flex:none; }
+  .topnav{ display:flex; align-items:center; gap:22px; font-size:13.5px; color:var(--ink-dim); }
+  .topnav a{ text-decoration:none; }
+  .cta-pill{
+    display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px;
+    background:linear-gradient(160deg,var(--accent),var(--accent-2)); color:#fff; font-weight:600; font-size:13.5px;
+    text-decoration:none; box-shadow:0 10px 24px rgba(58,86,232,.35);
+  }
+
+  /* ---- hero ---- */
+  .hero{ padding:96px 0 64px; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; display:inline-flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--gold); }
+  .hero h1{ font-size:clamp(38px,6vw,64px); line-height:1.04; text-wrap:balance; max-width:14ch; }
+  .hero h1 em{ font-style:normal; background:linear-gradient(120deg,var(--accent),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero .lede{ margin-top:22px; max-width:56ch; font-size:17.5px; line-height:1.65; color:var(--ink-dim); }
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top:34px; }
+  .pill{
+    font-size:12.5px; font-weight:600; color:var(--ink-dim); border:1px solid var(--hair); background:var(--bg-2);
+    padding:8px 14px; border-radius:999px; display:inline-flex; align-items:center; gap:7px;
+  }
+  .pill b{ color:var(--ink); font-weight:700; }
+
+  .hero-strip{
+    margin-top:56px; display:flex; gap:18px; overflow-x:auto; padding:8px 0 26px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 3%,#000 92%,transparent);
+  }
+  .hero-strip img{
+    height:400px; flex:none; border-radius:28px; box-shadow:var(--shadow);
+    border:1px solid rgba(255,255,255,.06);
+  }
+  .hero-strip img:nth-child(2){ transform:translateY(18px); }
+  .hero-strip img:nth-child(3){ transform:translateY(-10px); }
+  .hero-strip img:nth-child(4){ transform:translateY(10px); }
+
+  /* ---- section shell ---- */
+  section.step{ padding:88px 0; border-top:1px solid var(--hair); }
+  .step-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:20px; }
+  .step-num{ font-family:'JetBrains Mono', monospace; font-size:14px; color:var(--gold); font-weight:600; letter-spacing:.04em; }
+  .step h2{ font-size:clamp(26px,3.4vw,36px); }
+  .step-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  .step-grid.reverse .step-media{ order:2; }
+  .step-grid.reverse .step-text{ order:1; }
+  .step-text p{ color:var(--ink-dim); font-size:16px; line-height:1.75; }
+  .step-text p + p{ margin-top:14px; }
+  .step-text .quote{
+    margin-top:20px; padding-left:16px; border-left:2px solid var(--accent);
+    font-size:14.5px; color:var(--ink-faint); font-style:normal;
+  }
+  .step-media{ position:relative; display:flex; justify-content:center; }
+  .step-media img{ width:100%; max-width:340px; border-radius:30px; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.06); }
+  .step-media.duo{ gap:22px; }
+  .step-media.duo img{ max-width:260px; }
+  .media-cluster{ display:flex; gap:22px; align-items:flex-end; }
+  .media-cluster img:first-child{ transform:translateY(24px); }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .tag{ font-size:12px; font-weight:600; padding:6px 11px; border-radius:8px; background:var(--bg-3); color:var(--ink-dim); border:1px solid var(--hair); }
+
+  /* ---- game gallery ---- */
+  .game-intro{ max-width:70ch; color:var(--ink-dim); font-size:16px; line-height:1.75; margin-bottom:12px; }
+  .game-intro + .game-intro{ margin-top:14px; }
+  .stage-strip{ margin:44px 0 8px; }
+  .stage-strip-label{ font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:16px; }
+  .gallery{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+  }
+  .gallery.risk{ grid-template-columns:repeat(2,1fr); max-width:640px; }
+  .card{
+    background:var(--bg-2); border:1px solid var(--hair); border-radius:20px; padding:16px 16px 18px; overflow:hidden;
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .card:hover{ transform:translateY(-3px); border-color:rgba(111,140,255,.35); }
+  .card img{ width:100%; border-radius:14px; display:block; box-shadow:0 14px 30px rgba(0,0,0,.4); }
+  .card .cap{ margin-top:13px; }
+  .card .cap b{ font-size:14px; font-weight:700; display:block; }
+  .card .cap span{ font-size:12.5px; color:var(--ink-dim); line-height:1.5; display:block; margin-top:4px; }
+  .card.warn{ border-color:rgba(226,104,95,.28); }
+  .card.warn .cap b{ color:var(--danger); }
+
+  /* ---- closing ---- */
+  .closing{ padding:96px 0 60px; text-align:center; }
+  .closing h2{ font-size:clamp(28px,4vw,42px); max-width:20ch; margin:0 auto; text-wrap:balance; }
+  .closing p{ max-width:52ch; margin:18px auto 0; color:var(--ink-dim); font-size:16px; line-height:1.7; }
+  .closing .cta-row{ display:flex; justify-content:center; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .btn-ghost{
+    padding:12px 22px; border-radius:999px; border:1px solid var(--hair); color:var(--ink); text-decoration:none;
+    font-weight:600; font-size:14px;
+  }
+
+  footer{ border-top:1px solid var(--hair); padding:30px 0; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--ink-faint); flex-wrap:wrap; gap:10px; }
+  footer a{ color:var(--ink-dim); text-decoration:none; }
+
+  @media (max-width: 860px){
+    .step-grid{ grid-template-columns:1fr; gap:34px; }
+    .step-grid.reverse .step-media{ order:1; }
+    .step-grid.reverse .step-text{ order:2; }
+    .gallery{ grid-template-columns:repeat(2,1fr); }
+    .gallery.risk{ grid-template-columns:repeat(2,1fr); max-width:none; }
+    .topnav{ display:none; }
+    .hero{ padding:72px 0 44px; }
+    section.step{ padding:64px 0; }
+  }
+  @media (max-width: 520px){
+    .gallery{ grid-template-columns:repeat(2,1fr); gap:10px; }
+    .wrap{ padding:0 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>ABB Eko-ağac · Case Study</a>
+    <nav class="topnav">
+      <a href="#addimlar">Addımlar</a>
+      <a href="#oyun">Oyun</a>
+      <a href="#nəticə">Nəticə</a>
+    </nav>
+    <a class="cta-pill" href="https://nazrinalizada.com/abb/" target="_blank" rel="noopener">Canlı demoya bax →</a>
+  </div>
+</div>
+
+<div id="top" class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Product case study</div>
+    <h1>Bank tətbiqinə <em>böyüyən ağac</em> gətirmək</h1>
+    <p class="lede">
+      ABB mobil tətbiqi üçün gamification funksiyası: istifadəçi virtual bonsai əkir, hər 6 saatdan bir sulayır,
+      6 mərhələ boyu böyüdür — və prosesi tamamlayanda ABB onun adından real ağac əkir. Aşağıda bu funksiyanın
+      hər addımı, hər ekranı və oyunun bütün vəziyyətləri addım-addım göstərilib.
+    </p>
+    <div class="hero-meta">
+      <span class="pill"><b>7</b>&nbsp;ekran</span>
+      <span class="pill"><b>6</b>&nbsp;böyümə mərhələsi</span>
+      <span class="pill">Xüsusi <b>WebGL</b> mühərriki</span>
+      <span class="pill"><b>Azərbaycan</b> dilində</span>
+      <span class="pill">React · Vite · Tailwind</span>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <img src="images/home.png" alt="Əsas səhifə">
+    <img src="images/onboarding.png" alt="Məhsul tanıtımı">
+    <img src="images/game-tac.png" alt="Oyun — Tac mərhələsi">
+    <img src="images/overview.png" alt="Kampaniya səhifəsi">
+    <img src="images/game-grown.png" alt="Ağac yetişdi">
+  </div>
+</div>
+
+<div id="addimlar">
+
+<section class="step">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">01</span><h2>Əsas səhifə</h2></div>
+    <div class="step-grid">
+      <div class="step-text">
+        <p>Kampaniyaya keçid üçün əsas səhifədə banner göstərilir. Banner istifadəçi tərəfindən X düyməsi ilə
+        bağlana bilər — məcburi deyil, diqqəti cəlb edir, amma sıxışdırmır.</p>
+        <p>Banner daxilindəki geri sayım ağacı 6 saatdan bir sulamaq üçün çağırışı vizual olaraq xatırladır.
+        Əgər ağac 48 saat ərzində sulanmasa, o quruyur — bu, istifadəçini müntəzəm qayıtmağa təşviq edən yüngül təzyiqdir.</p>
+        <div class="tag-row">
+          <span class="tag">Geri sayım banner</span>
+          <span class="tag">Bağlana bilən (X)</span>
+          <span class="tag">6 saatlıq dövr</span>
+          <span class="tag">48 saat risk pəncərəsi</span>
+        </div>
+      </div>
+      <div class="step-media"><img src="images/home.png" alt="Əsas səhifə — sulama banneri"></div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">02</span><h2>Kəşf et</h2></div>
+    <div class="step-grid reverse">
+      <div class="step-text">
+        <p>"Kəşf et" bölməsi fərqli kampaniyalar üçün ayrıca banner sırası göstərir. Eko-ağac kampaniyası da
+        burada, digər aktiv kampaniyaların yanında yer alır.</p>
+        <p>Bu bannerlər vasitəsilə istifadəçi birbaşa müvafiq kampaniyaya keçid edir — Eko-ağac üçün bu, məhsul
+        tanıtımı ekranına aparan giriş nöqtəsidir.</p>
+        <div class="tag-row">
+          <span class="tag">Çoxlu kampaniya banneri</span>
+          <span class="tag">Giriş nöqtəsi</span>
+        </div>
+      </div>
+      <div class="step-media"><img src="images/explore.png" alt="Kəşf et ekranı"></div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">03</span><h2>Məhsul tanıtımı</h2></div>
+    <div class="step-grid">
+      <div class="step-text">
+        <p>Onboarding ekranı kampaniya haqqında istifadəçiyə qısa məlumat verir: necə xal qazanmaq olar, hansı
+        hədiyyələr gözləyir, niyə tələsmək lazımdır.</p>
+        <p>"Toxumunu ək" CTA düyməsi vasitəsilə istifadəçi kampaniyaya faktiki giriş edir — bu, funksiyanın
+        "bəli, iştirak edirəm" anıdır.</p>
+        <div class="tag-row">
+          <span class="tag">Qaydaların izahı</span>
+          <span class="tag">CTA: "Toxumunu ək"</span>
+        </div>
+      </div>
+      <div class="step-media"><img src="images/onboarding.png" alt="Məhsul tanıtımı ekranı"></div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">04</span><h2>Ağac növünün seçimi</h2></div>
+    <div class="step-grid reverse">
+      <div class="step-text">
+        <p>İstifadəçiyə horizontal scroll vasitəsilə bir neçə ağac növü arasında seçim təklif olunur — Zeytun,
+        Şam, Ərik, Gavalı ağacı. Hər variant öz görünüşü ilə fərqlənir, seçim isə tamamilə şəxsi zövqə əsaslanır.</p>
+        <p>Seçilən ağac növü bundan sonra bütün kampaniya boyu istifadəçinin öz ağacı olaraq izlənir.</p>
+        <div class="tag-row">
+          <span class="tag">Horizontal scroll</span>
+          <span class="tag">4 ağac növü</span>
+        </div>
+      </div>
+      <div class="step-media"><img src="images/tree-choice.png" alt="Ağac növünün seçimi — carousel"></div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">05</span><h2>Kampaniya səhifəsi</h2></div>
+    <div class="step-grid">
+      <div class="step-text">
+        <p>Seçilən ağac növü hero image olaraq görünür, yığılan yarpaq sayı isə əsas göstərici kimi önə çıxarılır.</p>
+        <p>Xal qazanmanın yolları "Tapşırıqlar" və "Ödənişlərdən qazan" bölmələrində əksini tapır. "Liderlər lövhəsi"
+        istifadəçinin cari tutduğu yeri və digər ABB müştərilərini göstərərək yarışma hissi yaradır. "Qazandıqlarının
+        tarixçəsi" bölməsində isə hansı əməliyyatdan neçə yarpaq qazanıldığı ətraflı görünür.</p>
+        <p>"Ağacı sula" düyməsi birbaşa canlı 3D oyuna yönləndirir.</p>
+        <div class="tag-row">
+          <span class="tag">Yarpaq sayğacı</span>
+          <span class="tag">Tapşırıqlar</span>
+          <span class="tag">Ödənişlərdən qazan</span>
+          <span class="tag">Liderlər lövhəsi</span>
+          <span class="tag">Əməliyyat tarixçəsi</span>
+        </div>
+      </div>
+      <div class="step-media duo">
+        <div class="media-cluster">
+          <img src="images/overview.png" alt="Kampaniya səhifəsi — yuxarı hissə">
+          <img src="images/overview-tasks.png" alt="Kampaniya səhifəsi — tapşırıqlar və liderlər">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<section class="step" id="oyun">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">06</span><h2>Canlı 3D oyun</h2></div>
+    <p class="game-intro">
+      "Ağacı sula" düyməsinə basdıqdan sonra istifadəçi sıfırdan yazılmış, xüsusi WebGL mühərriki üzərində işləyən
+      canlı bonsai səhnəsinə keçir. Ağac 6 mərhələdən keçərək böyüyür — hər mərhələ 3 sulama tələb edir, sulama isə
+      hər 6 saatdan bir mümkündür. Aşağıda oyunun bütün əsas vəziyyətləri göstərilib.
+    </p>
+
+    <div class="stage-strip">
+      <div class="stage-strip-label">Başlanğıc</div>
+      <div class="gallery">
+        <div class="card">
+          <img src="images/game-empty.png" alt="Boş vəziyyət">
+          <div class="cap"><b>Toxum əkilməyib</b><span>İstifadəçi "Toxumu ək" düyməsi ilə prosesi başladır.</span></div>
+        </div>
+        <div class="card">
+          <img src="images/game-toxum.png" alt="Toxum mərhələsi">
+          <div class="cap"><b>Toxum (0/3)</b><span>Birinci mərhələ başladı. Sula düyməsi hazır vəziyyətdə işıqlanır.</span></div>
+        </div>
+        <div class="card">
+          <img src="images/game-watered.png" alt="Sulandıqdan sonra">
+          <div class="cap"><b>Sulandı, sayğac işə düşdü</b><span>Növbəti sulamaya qədər 6 saatlıq geri sayım görünür.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-strip">
+      <div class="stage-strip-label">6 böyümə mərhələsi</div>
+      <div class="gallery">
+        <div class="card">
+          <img src="images/game-cucerti.png" alt="Cücərti mərhələsi">
+          <div class="cap"><b>Cücərti</b><span>2-ci mərhələ — ilk yarpaqlar görünür.</span></div>
+        </div>
+        <div class="card">
+          <img src="images/game-fidan.png" alt="Fidan mərhələsi">
+          <div class="cap"><b>Fidan</b><span>3-cü mərhələ — gövdə qalınlaşır, budaqlanma başlayır.</span></div>
+        </div>
+        <div class="card">
+          <img src="images/game-tac.png" alt="Tac mərhələsi">
+          <div class="cap"><b>Tac</b><span>4-cü mərhələ — tam formalaşmış yaşıl tac.</span></div>
+        </div>
+        <div class="card">
+          <img src="images/game-ciceklenme.png" alt="Çiçəklənmə mərhələsi">
+          <div class="cap"><b>Çiçəklənmə</b><span>5-ci mərhələ — tac üzərində çiçəklər açılır.</span></div>
+        </div>
+        <div class="card">
+          <img src="images/game-grown.png" alt="Meyvələr mərhələsi — ağac yetişdi">
+          <div class="cap"><b>Meyvələr — ağac yetişdi</b><span>Son mərhələ tamamlananda ABB istifadəçi adından real ağac əkəcəyini bildirir.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-strip">
+      <div class="stage-strip-label">Risk vəziyyətləri</div>
+      <div class="gallery risk">
+        <div class="card warn">
+          <img src="images/game-pest.png" alt="Zərərverici peyda olub">
+          <div class="cap"><b>Zərərverici</b><span>Təsadüfi olaraq peyda olur. 48 saat ərzində toxunub təmizlənməlidir.</span></div>
+        </div>
+        <div class="card warn">
+          <img src="images/game-dead.png" alt="Ağac qurudu">
+          <div class="cap"><b>Ağac qurudu</b><span>Vaxtında təmizlənməzsə, ağac quruyur — istifadəçi kəsib yenidən əkməlidir.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="step">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">07</span><h2>Liderlər lövhəsi</h2></div>
+    <div class="step-grid reverse">
+      <div class="step-text">
+        <p>Kampaniya səhifəsindən açılan ayrıca ekran — istifadəçilər digər ABB müştəriləri ilə yığılan yarpaq
+        sayına görə yarışır. "Bu həftə" və "Ümumi" tabları arasında keçid mümkündür.</p>
+        <p>Bu ekran sırf gamification məqsədi daşıyır: sosial müqayisə istifadəçini daha tez-tez qayıtmağa
+        təşviq edən əlavə bir qat yaradır.</p>
+        <div class="tag-row">
+          <span class="tag">Bu həftə / Ümumi</span>
+          <span class="tag">Sosial müqayisə</span>
+          <span class="tag">Nəticəni paylaş</span>
+        </div>
+      </div>
+      <div class="step-media"><img src="images/leaderboard.png" alt="Liderlər lövhəsi ekranı"></div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="nəticə">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Nəticə</div>
+    <h2>Virtual qərar, real ağac</h2>
+    <p>
+      Yeddi ekran, altı böyümə mərhələsi və sıfırdan yazılmış WebGL mühərriki — hamısı bir məqsədə xidmət edir:
+      bank tətbiqindəki gündəlik adəti, real ekoloji nəticəyə çevirmək. İstifadəçi mobil tətbiqdə bir neçə saniyə
+      sərf edir, ABB isə onun adından həqiqi ağac əkir.
+    </p>
+    <div class="cta-row">
+      <a class="cta-pill" href="https://nazrinalizada.com/abb/" target="_blank" rel="noopener">Canlı demoya bax →</a>
+      <a class="btn-ghost" href="https://nazrinalizada.com/" target="_blank" rel="noopener">Portfolioya qayıt</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>ABB Eko-ağac — Product Case Study</span>
+    <span>Nazrin Alizada, 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
